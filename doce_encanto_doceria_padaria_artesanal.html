@@ -1,0 +1,1291 @@
+<!DOCTYPE html>
+<html lang="pt-BR" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DOCE ENCANTO — Doceria &amp; Padaria Artesanal</title>
+    <meta name="description" content="Feito com carinho, preparado para encantar. Bolos artesanais, doces finos, brownies, tortas e pães de fermentação natural.">
+
+    <!-- Google Fonts: Playfair Display (Editorial) + Plus Jakarta Sans (Moderno e Limpo) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,600;0,700;0,800;1,500;1,600&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+    <!-- Font Awesome 6 -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        cream: {
+                            50: '#FDFBF7',
+                            100: '#FAF6F0',
+                            200: '#F3ECE1',
+                            300: '#E6D9C6',
+                            400: '#D4C1A5'
+                        },
+                        coffee: {
+                            600: '#6D4C41',
+                            700: '#5D4037',
+                            800: '#3E2723',
+                            900: '#2B1B17',
+                            950: '#1D110E'
+                        },
+                        caramel: {
+                            300: '#E8B87D',
+                            400: '#D99B52',
+                            500: '#C87D32',
+                            600: '#A86320',
+                            700: '#874D15'
+                        }
+                    },
+                    fontFamily: {
+                        serif: ['Playfair Display', 'Georgia', 'serif'],
+                        sans: ['Plus Jakarta Sans', 'sans-serif']
+                    }
+                }
+            }
+        }
+    </script>
+
+    <!-- ==========================================================================
+         /* === ESTILOS (styles.css) === */
+         ========================================================================== -->
+    <style>
+        :root {
+            --bg-cream: #FAF6F0;
+            --bg-sand: #F3ECE1;
+            --coffee-dark: #3E2723;
+            --coffee-deep: #2B1B17;
+            --caramel-main: #C87D32;
+            --caramel-light: #D99B52;
+            --white-pure: #FFFFFF;
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            background-color: var(--bg-cream);
+            color: var(--coffee-dark);
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            overflow-x: hidden;
+        }
+
+        /* Scrollbar Elegante */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #F3ECE1;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #C87D32;
+            border-radius: 9999px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #3E2723;
+        }
+
+        /* Cabeçalho Glassmorphism Bege/Branco */
+        .header-glass {
+            background: rgba(250, 246, 240, 0.88);
+            backdrop-filter: blur(14px);
+            -webkit-backdrop-filter: blur(14px);
+            border-bottom: 1px solid rgba(62, 39, 35, 0.08);
+            transition: all 0.35s ease;
+        }
+
+        .header-scrolled {
+            background: rgba(255, 255, 255, 0.95);
+            box-shadow: 0 10px 30px rgba(62, 39, 35, 0.08);
+            padding-top: 0.75rem !important;
+            padding-bottom: 0.75rem !important;
+        }
+
+        /* Botão Caramelo Boutique */
+        .btn-caramel {
+            background: linear-gradient(135deg, #D99B52 0%, #C87D32 100%);
+            color: #FFFFFF;
+            transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+            box-shadow: 0 8px 20px rgba(200, 125, 50, 0.28);
+        }
+
+        .btn-caramel:hover {
+            background: linear-gradient(135deg, #C87D32 0%, #A86320 100%);
+            transform: translateY(-2px);
+            box-shadow: 0 12px 26px rgba(200, 125, 50, 0.38);
+        }
+
+        /* Divisória Editorial */
+        .editorial-line {
+            height: 2px;
+            width: 64px;
+            background: linear-gradient(90deg, #C87D32, #E8B87D);
+            border-radius: 2px;
+        }
+
+        /* Animações Scroll Reveal */
+        .reveal {
+            opacity: 0;
+            transform: translateY(28px);
+            transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .reveal-delay-1 { transition-delay: 0.1s; }
+        .reveal-delay-2 { transition-delay: 0.2s; }
+        .reveal-delay-3 { transition-delay: 0.3s; }
+
+        /* Cards de Categoria */
+        .category-card {
+            transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+        }
+
+        .category-card:hover {
+            transform: translateY(-6px);
+            box-shadow: 0 18px 35px rgba(62, 39, 35, 0.12);
+        }
+
+        .category-card.selected {
+            border-color: #C87D32;
+            background-color: #FFFFFF;
+            box-shadow: 0 14px 30px rgba(200, 125, 50, 0.18);
+        }
+
+        /* Cards do Catálogo */
+        .product-card {
+            background: #FFFFFF;
+            border: 1px solid rgba(62, 39, 35, 0.08);
+            transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+        }
+
+        .product-card:hover {
+            transform: translateY(-7px);
+            border-color: rgba(200, 125, 50, 0.45);
+            box-shadow: 0 22px 42px rgba(62, 39, 35, 0.11);
+        }
+
+        .product-card img {
+            transition: transform 0.65s cubic-bezier(0.165, 0.84, 0.44, 1);
+        }
+
+        .product-card:hover img {
+            transform: scale(1.07);
+        }
+
+        /* Inputs do Modal */
+        .boutique-input {
+            background-color: #FAF6F0;
+            border: 1px solid rgba(62, 39, 35, 0.16);
+            color: #3E2723;
+            transition: all 0.25s ease;
+        }
+
+        .boutique-input:focus {
+            outline: none;
+            background-color: #FFFFFF;
+            border-color: #C87D32;
+            box-shadow: 0 0 0 3px rgba(200, 125, 50, 0.16);
+        }
+
+        /* Animação Suave Flutuante WhatsApp */
+        @keyframes soft-pulse {
+            0% { box-shadow: 0 0 0 0 rgba(37, 211, 102, 0.45); }
+            70% { box-shadow: 0 0 0 14px rgba(37, 211, 102, 0); }
+            100% { box-shadow: 0 0 0 0 rgba(37, 211, 102, 0); }
+        }
+        .wa-float {
+            animation: soft-pulse 2.6s infinite;
+        }
+    </style>
+</head>
+<body class="antialiased selection:bg-caramel-500 selection:text-white">
+
+    <!-- ==========================================================================
+         1. CABEÇALHO FIXO (GLASSMORPHISM BEGE/BRANCO)
+         ========================================================================== -->
+    <header id="main-header" class="header-glass fixed top-0 left-0 w-full z-50 py-4">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between">
+            
+            <!-- Logo DOCE ENCANTO -->
+            <a href="#inicio" class="flex items-center gap-3 group">
+                <div class="w-11 h-11 rounded-2xl bg-coffee-800 text-cream-100 flex items-center justify-center shadow-md group-hover:bg-caramel-500 transition-colors duration-300">
+                    <!-- Ícone SVG Croissant / Confeitaria Artesanal -->
+                    <svg class="w-6 h-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M12 3c-2.5 0-4.5 1.8-4.5 4 0 1.2.6 2.3 1.5 3H15c.9-.7 1.5-1.8 1.5-3 0-2.2-2-4-4.5-4Z"/>
+                        <path d="M5 10h14l-1.2 8.5A2 2 0 0 1 15.8 20H8.2a2 2 0 0 1-2-1.5L5 10Z"/>
+                        <path d="M9 14v3"/>
+                        <path d="M12 14v3"/>
+                        <path d="M15 14v3"/>
+                    </svg>
+                </div>
+                <div class="flex flex-col">
+                    <span class="font-serif font-bold text-xl sm:text-2xl tracking-wide text-coffee-900 leading-none">
+                        DOCE <span class="text-caramel-500 italic">ENCANTO</span>
+                    </span>
+                    <span class="text-[10px] font-semibold uppercase tracking-[0.26em] text-coffee-600 mt-1">
+                        Doceria &amp; Padaria
+                    </span>
+                </div>
+            </a>
+
+            <!-- Menu Desktop -->
+            <nav class="hidden lg:flex items-center gap-8">
+                <a href="#inicio" class="text-sm font-medium text-coffee-800 hover:text-caramel-500 transition-colors">Início</a>
+                <a href="#produtos" class="text-sm font-medium text-coffee-800 hover:text-caramel-500 transition-colors">Produtos</a>
+                <a href="#nossa-historia" class="text-sm font-medium text-coffee-800 hover:text-caramel-500 transition-colors">Nossa História</a>
+                <a href="#contato" class="text-sm font-medium text-coffee-800 hover:text-caramel-500 transition-colors">Contato</a>
+            </nav>
+
+            <!-- Botão "Faça seu pedido" + Hambúrguer Mobile -->
+            <div class="flex items-center gap-3">
+                <button onclick="openOrderModal()" class="hidden sm:inline-flex items-center gap-2 btn-caramel font-semibold text-xs uppercase tracking-wider px-6 py-3.5 rounded-full cursor-pointer">
+                    <i class="fa-solid fa-bag-shopping text-sm"></i>
+                    <span>Faça seu pedido</span>
+                </button>
+
+                <button id="mobile-menu-toggle" aria-label="Abrir menu" class="lg:hidden w-11 h-11 rounded-xl bg-white border border-coffee-800/15 text-coffee-900 flex items-center justify-center hover:border-caramel-500 hover:text-caramel-500 transition-colors">
+                    <i id="mobile-menu-icon" class="fa-solid fa-bars text-lg"></i>
+                </button>
+            </div>
+        </div>
+
+        <!-- Menu Mobile Dropdown -->
+        <div id="mobile-menu" class="hidden lg:hidden bg-white/98 backdrop-blur-xl border-b border-coffee-800/10 px-6 pt-4 pb-7 mt-3 shadow-xl">
+            <nav class="flex flex-col space-y-3">
+                <a href="#inicio" class="mobile-link text-sm font-semibold text-coffee-900 hover:text-caramel-500 py-2 border-b border-cream-200">Início</a>
+                <a href="#produtos" class="mobile-link text-sm font-semibold text-coffee-900 hover:text-caramel-500 py-2 border-b border-cream-200">Produtos</a>
+                <a href="#nossa-historia" class="mobile-link text-sm font-semibold text-coffee-900 hover:text-caramel-500 py-2 border-b border-cream-200">Nossa História</a>
+                <a href="#contato" class="mobile-link text-sm font-semibold text-coffee-900 hover:text-caramel-500 py-2">Contato</a>
+                <button onclick="openOrderModal(); toggleMobileMenu();" class="w-full mt-2 btn-caramel font-bold text-xs uppercase tracking-wider py-4 rounded-full flex items-center justify-center gap-2">
+                    <i class="fa-solid fa-bag-shopping"></i>
+                    <span>Faça seu pedido</span>
+                </button>
+            </nav>
+        </div>
+    </header>
+
+    <!-- ==========================================================================
+         2. PÁGINA INICIAL (HERO SECTION)
+         ========================================================================== -->
+    <section id="inicio" class="relative min-h-[92vh] flex items-center pt-28 pb-20 overflow-hidden">
+        <!-- Imagem de Fundo: Mesa Farta com Doces, Bolos e Pães Artesanais -->
+        <div class="absolute inset-0 z-0">
+            <img 
+                src="https://images.unsplash.com/photo-1509440159596-0249088772ff?auto=format&fit=crop&w=2000&q=85" 
+                alt="Mesa artesanal farta com bolos, doces e pães frescos da Doce Encanto" 
+                class="w-full h-full object-cover object-center"
+                onerror="this.src='https://placehold.co/1920x1080/FAF6F0/3E2723?text=DOCE+ENCANTO'"
+            >
+            <!-- Gradiente Editorial Creme & Café para Leitura Impecável -->
+            <div class="absolute inset-0 bg-gradient-to-r from-cream-100/95 via-cream-100/85 to-cream-100/35"></div>
+            <div class="absolute inset-0 bg-gradient-to-t from-cream-100 via-transparent to-cream-100/40"></div>
+        </div>
+
+        <!-- Conteúdo Principal -->
+        <div class="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full">
+            <div class="max-w-2xl">
+                <!-- Selo Artesanal -->
+                <div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-white/90 border border-caramel-500/30 shadow-sm mb-6">
+                    <i class="fa-solid fa-wheat-awn text-caramel-500 text-xs"></i>
+                    <span class="text-xs font-bold uppercase tracking-[0.2em] text-coffee-800">Confeitaria &amp; Padaria Artesanal</span>
+                </div>
+
+                <!-- Título Solicitado -->
+                <h1 class="font-serif font-bold text-4xl sm:text-5xl lg:text-6xl text-coffee-900 leading-[1.14] mb-5">
+                    Feito com carinho, preparado para <span class="text-caramel-500 italic">encantar.</span>
+                </h1>
+
+                <!-- Subtítulo Solicitado -->
+                <p class="font-serif italic text-xl sm:text-2xl text-coffee-700 mb-5">
+                    "Doces momentos começam com sabores especiais."
+                </p>
+
+                <p class="text-coffee-700/90 text-sm sm:text-base leading-relaxed max-w-xl mb-9">
+                    Fornadas diárias de pães de fermentação natural, bolos fofinhos com chocolate nobre, tortas frescas e doces artesanais feitos com ingredientes selecionados.
+                </p>
+
+                <!-- Botões de Ação -->
+                <div class="flex flex-col sm:flex-row items-stretch sm:items-center gap-4">
+                    <a href="#produtos" class="btn-caramel font-bold text-xs sm:text-sm uppercase tracking-wider px-8 py-4 rounded-full flex items-center justify-center gap-3">
+                        <span>Conheça nossos produtos</span>
+                        <i class="fa-solid fa-arrow-down"></i>
+                    </a>
+
+                    <a id="hero-whatsapp-btn" href="#" target="_blank" rel="noopener noreferrer" class="bg-white/95 hover:bg-coffee-800 text-coffee-900 hover:text-white border border-coffee-800/15 font-semibold text-xs sm:text-sm uppercase tracking-wider px-7 py-4 rounded-full shadow-sm transition-all flex items-center justify-center gap-2.5">
+                        <i class="fa-brands fa-whatsapp text-[#25D366] text-lg"></i>
+                        <span>Encomendar pelo WhatsApp</span>
+                    </a>
+                </div>
+
+                <!-- Selos de Confiança -->
+                <div class="grid grid-cols-3 gap-4 sm:gap-8 mt-12 pt-8 border-t border-coffee-800/10 max-w-lg">
+                    <div>
+                        <span class="font-serif font-bold text-2xl text-caramel-500 block">100%</span>
+                        <span class="text-xs font-medium text-coffee-700">Produção Artesanal</span>
+                    </div>
+                    <div>
+                        <span class="font-serif font-bold text-2xl text-caramel-500 block">Fornadas</span>
+                        <span class="text-xs font-medium text-coffee-700">Fresquinhas todo dia</span>
+                    </div>
+                    <div>
+                        <span class="font-serif font-bold text-2xl text-caramel-500 block">4.9 ★</span>
+                        <span class="text-xs font-medium text-coffee-700">Clientes apaixonados</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ==========================================================================
+         3. CATEGORIAS (6 CARDS ILUSTRADOS / FOTOGRÁFICOS INTERATIVOS)
+         ========================================================================== -->
+    <section class="py-20 bg-cream-200/70 border-y border-coffee-800/5">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            
+            <!-- Cabeçalho -->
+            <div class="flex flex-col md:flex-row md:items-end justify-between gap-4 mb-12 reveal">
+                <div>
+                    <span class="text-xs font-bold uppercase tracking-[0.25em] text-caramel-500">Explore por Sabor</span>
+                    <h2 class="font-serif font-bold text-3xl sm:text-4xl text-coffee-900 mt-2">
+                        Nossas <span class="text-caramel-500 italic">Categorias</span>
+                    </h2>
+                    <div class="editorial-line mt-4"></div>
+                </div>
+                <p class="text-sm text-coffee-700 max-w-md">
+                    Selecione uma categoria abaixo para filtrar rapidamente nosso catálogo de delícias artesanais.
+                </p>
+            </div>
+
+            <!-- Grid com as 6 Categorias Solicitadas -->
+            <div id="categories-grid" class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-4 sm:gap-5 reveal">
+                <!-- Renderizado dinamicamente via JavaScript (data.js) -->
+            </div>
+
+        </div>
+    </section>
+
+    <!-- ==========================================================================
+         4. DESTAQUES — "MAIS PEDIDOS"
+         ========================================================================== -->
+    <section class="py-20 bg-cream-100">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            
+            <div class="text-center max-w-2xl mx-auto mb-14 reveal">
+                <span class="inline-flex items-center gap-1.5 text-xs font-bold uppercase tracking-[0.25em] text-caramel-500">
+                    <i class="fa-solid fa-fire-flame-curved"></i> Favoritos da Casa
+                </span>
+                <h2 class="font-serif font-bold text-3xl sm:text-4xl lg:text-5xl text-coffee-900 mt-2">
+                    Os <span class="text-caramel-500 italic">Mais Pedidos</span>
+                </h2>
+                <div class="editorial-line mx-auto my-4"></div>
+                <p class="text-sm sm:text-base text-coffee-700">
+                    As receitas que conquistaram o coração dos nossos clientes e saem quentinhas todos os dias da nossa cozinha.
+                </p>
+            </div>
+
+            <!-- Grid dos Destaques (Renderizado via JS) -->
+            <div id="highlights-grid" class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <!-- Preenchido via JavaScript -->
+            </div>
+
+        </div>
+    </section>
+
+    <!-- ==========================================================================
+         5. NOSSO CATÁLOGO (FILTRÁVEL + PEDIDOS PELO WHATSAPP)
+         ========================================================================== -->
+    <section id="produtos" class="py-24 bg-white border-t border-coffee-800/5">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            
+            <!-- Cabeçalho do Catálogo -->
+            <div class="text-center max-w-2xl mx-auto mb-10 reveal">
+                <span class="text-xs font-bold uppercase tracking-[0.25em] text-caramel-500">Cardápio Artesanal</span>
+                <h2 class="font-serif font-bold text-3xl sm:text-4xl lg:text-5xl text-coffee-900 mt-2">
+                    Nosso <span class="text-caramel-500 italic">Catálogo</span>
+                </h2>
+                <div class="editorial-line mx-auto my-4"></div>
+                <p class="text-sm sm:text-base text-coffee-700">
+                    Escolha seus favoritos e faça seu pedido diretamente pelo WhatsApp com atendimento rápido e personalizado.
+                </p>
+            </div>
+
+            <!-- Barra de Filtros -->
+            <div id="catalog-filters" class="flex flex-wrap items-center justify-center gap-2.5 mb-12 reveal">
+                <!-- Botões gerados dinamicamente via JavaScript -->
+            </div>
+
+            <!-- Grid de Produtos do Catálogo -->
+            <div id="catalog-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- Cards gerados dinamicamente via JavaScript -->
+            </div>
+
+            <!-- Banner Geral de Encomendas Personalizadas -->
+            <div class="mt-16 bg-gradient-to-r from-coffee-900 via-coffee-800 to-coffee-900 rounded-3xl p-8 sm:p-12 text-white shadow-2xl relative overflow-hidden reveal">
+                <!-- Detalhe Decorativo -->
+                <div class="absolute -right-16 -top-16 w-64 h-64 rounded-full bg-caramel-500/15 blur-2xl pointer-events-none"></div>
+
+                <div class="relative z-10 flex flex-col lg:flex-row items-center justify-between gap-8">
+                    <div class="text-center lg:text-left max-w-xl">
+                        <span class="inline-block text-xs font-bold uppercase tracking-[0.25em] text-caramel-300 mb-2">
+                            Festas, Eventos &amp; Presentes
+                        </span>
+                        <h3 class="font-serif font-bold text-2xl sm:text-3xl lg:text-4xl leading-snug">
+                            Deseja uma encomenda sob medida ou kit para presente?
+                        </h3>
+                        <p class="text-cream-200/85 text-sm sm:text-base mt-3 leading-relaxed">
+                            Preparamos bolos personalizados, caixas de doces finos e cestas de café da manhã especiais para tornar sua celebração inesquecível.
+                        </p>
+                    </div>
+
+                    <div class="flex flex-col sm:flex-row items-center gap-4 shrink-0 w-full lg:w-auto">
+                        <button onclick="openOrderModal()" class="w-full sm:w-auto btn-caramel font-bold text-xs sm:text-sm uppercase tracking-wider px-7 py-4 rounded-full flex items-center justify-center gap-2.5 cursor-pointer">
+                            <i class="fa-solid fa-clipboard-list"></i>
+                            <span>Montar Encomenda</span>
+                        </button>
+                        <a id="general-whatsapp-btn" href="#" target="_blank" rel="noopener noreferrer" class="w-full sm:w-auto bg-[#25D366] hover:bg-[#20bd5a] text-coffee-950 font-extrabold text-xs sm:text-sm uppercase tracking-wider px-7 py-4 rounded-full shadow-lg transition-all flex items-center justify-center gap-2.5">
+                            <i class="fa-brands fa-whatsapp text-lg"></i>
+                            <span>Encomendas no WhatsApp</span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- ==========================================================================
+         6. SOBRE A LOJA ("NOSSA HISTÓRIA")
+         ========================================================================== -->
+    <section id="nossa-historia" class="py-24 bg-cream-100 border-t border-coffee-800/5 overflow-hidden">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-center">
+                
+                <!-- Coluna de Imagem Editorial -->
+                <div class="lg:col-span-6 relative reveal">
+                    <div class="relative rounded-3xl overflow-hidden shadow-2xl border-4 border-white">
+                        <img 
+                            src="https://images.unsplash.com/photo-1556910103-1c02745aae4d?auto=format&fit=crop&w=1000&q=85" 
+                            alt="Confeiteira preparando doces artesanais na Doce Encanto" 
+                            class="w-full h-[430px] sm:h-[500px] object-cover"
+                            onerror="this.src='https://placehold.co/800x900/F3ECE1/3E2723?text=Nossa+Historia'"
+                        >
+                        <div class="absolute inset-0 bg-gradient-to-t from-coffee-950/50 via-transparent to-transparent"></div>
+                    </div>
+
+                    <!-- Selo Flutuante Acolhedor -->
+                    <div class="hidden sm:flex items-center gap-4 bg-white p-5 rounded-2xl shadow-xl border border-caramel-500/25 absolute -bottom-6 -right-5 max-w-xs">
+                        <div class="w-12 h-12 rounded-xl bg-caramel-500/15 text-caramel-500 flex items-center justify-center text-xl shrink-0">
+                            <i class="fa-solid fa-heart"></i>
+                        </div>
+                        <div>
+                            <p class="font-serif font-bold text-coffee-900 text-base">Receitas de Família</p>
+                            <p class="text-xs text-coffee-600 mt-0.5">Ingredientes puros, sem conservantes artificiais.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Coluna de Texto -->
+                <div class="lg:col-span-6 reveal reveal-delay-1">
+                    <span class="text-xs font-bold uppercase tracking-[0.25em] text-caramel-500">Nossa História</span>
+                    <h2 class="font-serif font-bold text-3xl sm:text-4xl lg:text-5xl text-coffee-900 mt-2 leading-tight">
+                        Tradição artesanal que aquece o <span class="text-caramel-500 italic">coração.</span>
+                    </h2>
+                    <div class="editorial-line my-5"></div>
+
+                    <p class="text-coffee-800 text-sm sm:text-base leading-relaxed mb-4">
+                        A <strong>DOCE ENCANTO — Doceria &amp; Padaria</strong> nasceu do sonho de transformar receitas afetivas de família em experiências memoráveis para o dia a dia. O que começou em uma pequena cozinha cheia de aromas de baunilha, chocolate derretido e pão assando no forno hoje é um ponto de encontro acolhedor para quem valoriza o sabor verdadeiro.
+                    </p>
+                    <p class="text-coffee-700 text-sm sm:text-base leading-relaxed mb-8">
+                        Cada bolo, torta ou pão de fermentação natural passa por um processo cuidadoso: utilizamos manteiga extra sem sal, chocolates nobres de alta pureza, frutas frescas colhidas na estação e tempo respeitado em cada etapa do preparo.
+                    </p>
+
+                    <!-- 3 Pilares -->
+                    <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
+                        <div class="bg-white p-4 rounded-2xl border border-coffee-800/8 shadow-sm">
+                            <i class="fa-solid fa-seedling text-caramel-500 text-lg mb-2"></i>
+                            <h4 class="font-serif font-bold text-sm text-coffee-900">Ingredientes Nobres</h4>
+                            <p class="text-xs text-coffee-600 mt-1">Seleção rigorosa de cacau, frutas frescas e farinhas especiais.</p>
+                        </div>
+
+                        <div class="bg-white p-4 rounded-2xl border border-coffee-800/8 shadow-sm">
+                            <i class="fa-solid fa-hand-holding-heart text-caramel-500 text-lg mb-2"></i>
+                            <h4 class="font-serif font-bold text-sm text-coffee-900">Feito à Mão</h4>
+                            <p class="text-xs text-coffee-600 mt-1">Produção diária em pequenos lotes para garantir frescor máximo.</p>
+                        </div>
+
+                        <div class="bg-white p-4 rounded-2xl border border-coffee-800/8 shadow-sm">
+                            <i class="fa-solid fa-mug-hot text-caramel-500 text-lg mb-2"></i>
+                            <h4 class="font-serif font-bold text-sm text-coffee-900">Acolhimento</h4>
+                            <p class="text-xs text-coffee-600 mt-1">Atendimento próximo para cada pedido sair exatamente como você sonhou.</p>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- ==========================================================================
+         7. CONTATO & LOCALIZAÇÃO
+         ========================================================================== -->
+    <section id="contato" class="py-24 bg-cream-200/60 border-t border-coffee-800/5">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            
+            <div class="text-center max-w-2xl mx-auto mb-16 reveal">
+                <span class="text-xs font-bold uppercase tracking-[0.25em] text-caramel-500">Venha nos Visitar</span>
+                <h2 class="font-serif font-bold text-3xl sm:text-4xl lg:text-5xl text-coffee-900 mt-2">
+                    Contato &amp; <span class="text-caramel-500 italic">Atendimento</span>
+                </h2>
+                <div class="editorial-line mx-auto my-4"></div>
+                <p class="text-sm sm:text-base text-coffee-700">
+                    Passe para tomar um café fresquinho com a gente ou faça sua encomenda pelo WhatsApp.
+                </p>
+            </div>
+
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-stretch">
+                
+                <!-- Cards de Informações -->
+                <div class="lg:col-span-6 grid grid-cols-1 sm:grid-cols-2 gap-5 reveal">
+                    
+                    <!-- Endereço -->
+                    <div class="bg-white p-6 rounded-2xl border border-coffee-800/8 shadow-sm flex flex-col justify-between">
+                        <div>
+                            <div class="w-11 h-11 rounded-xl bg-caramel-500/15 text-caramel-500 flex items-center justify-center text-lg mb-4">
+                                <i class="fa-solid fa-location-dot"></i>
+                            </div>
+                            <h3 class="font-serif font-bold text-lg text-coffee-900">Nosso Endereço</h3>
+                            <p id="contact-address" class="text-sm text-coffee-700 mt-2 leading-relaxed">
+                                Rua das Acácias, 480 — Jardim Botânico<br>São Paulo - SP
+                            </p>
+                        </div>
+                        <span class="text-xs font-semibold text-caramel-500 mt-4 inline-block">Estacionamento fácil na frente</span>
+                    </div>
+
+                    <!-- Horários -->
+                    <div class="bg-white p-6 rounded-2xl border border-coffee-800/8 shadow-sm flex flex-col justify-between">
+                        <div>
+                            <div class="w-11 h-11 rounded-xl bg-caramel-500/15 text-caramel-500 flex items-center justify-center text-lg mb-4">
+                                <i class="fa-regular fa-clock"></i>
+                            </div>
+                            <h3 class="font-serif font-bold text-lg text-coffee-900">Horários</h3>
+                            <p id="contact-hours" class="text-sm text-coffee-700 mt-2 leading-relaxed">
+                                <strong>Seg a Sáb:</strong> 07h às 20h<br>
+                                <strong>Dom e Feriados:</strong> 08h às 14h
+                            </p>
+                        </div>
+                        <span class="text-xs font-semibold text-caramel-500 mt-4 inline-block">Fornadas às 07h30 e 15h30</span>
+                    </div>
+
+                    <!-- Telefone & WhatsApp -->
+                    <div class="bg-white p-6 rounded-2xl border border-coffee-800/8 shadow-sm flex flex-col justify-between">
+                        <div>
+                            <div class="w-11 h-11 rounded-xl bg-caramel-500/15 text-caramel-500 flex items-center justify-center text-lg mb-4">
+                                <i class="fa-solid fa-phone"></i>
+                            </div>
+                            <h3 class="font-serif font-bold text-lg text-coffee-900">Telefones</h3>
+                            <p id="contact-phones" class="text-sm text-coffee-700 mt-2 leading-relaxed">
+                                <strong>Fixo:</strong> (11) 3456-7890<br>
+                                <strong>WhatsApp:</strong> (11) 99999-9999
+                            </p>
+                        </div>
+                        <span class="text-xs font-semibold text-caramel-500 mt-4 inline-block">Atendimento rápido</span>
+                    </div>
+
+                    <!-- Instagram -->
+                    <div class="bg-white p-6 rounded-2xl border border-coffee-800/8 shadow-sm flex flex-col justify-between">
+                        <div>
+                            <div class="w-11 h-11 rounded-xl bg-caramel-500/15 text-caramel-500 flex items-center justify-center text-lg mb-4">
+                                <i class="fa-brands fa-instagram"></i>
+                            </div>
+                            <h3 class="font-serif font-bold text-lg text-coffee-900">Instagram</h3>
+                            <p id="contact-instagram" class="text-sm text-coffee-700 mt-2 leading-relaxed">
+                                @doceencanto.oficial
+                            </p>
+                            <p class="text-xs text-coffee-600 mt-1">Acompanhe as fornadas do dia e novidades nos stories!</p>
+                        </div>
+                        <a href="https://instagram.com" target="_blank" rel="noopener noreferrer" class="text-xs font-bold text-caramel-500 hover:underline mt-4 inline-flex items-center gap-1">
+                            <span>Seguir perfil</span>
+                            <i class="fa-solid fa-arrow-up-right-from-square text-[10px]"></i>
+                        </a>
+                    </div>
+
+                </div>
+
+                <!-- Coluna Direita: Mapa & CTA WhatsApp -->
+                <div class="lg:col-span-6 flex flex-col gap-5 reveal reveal-delay-1">
+                    <div class="rounded-3xl overflow-hidden border-4 border-white shadow-lg h-64 sm:h-72 bg-cream-200 relative">
+                        <iframe 
+                            title="Mapa de localização DOCE ENCANTO"
+                            src="https://www.openstreetmap.org/export/embed.html?bbox=-46.6650%2C-23.5680%2C-46.6520%2C-23.5590&amp;layer=mapnik&amp;marker=-23.5635%2C-46.6585" 
+                            class="w-full h-full border-0"
+                            loading="lazy"
+                        ></iframe>
+                    </div>
+
+                    <div class="bg-white p-7 rounded-3xl border border-caramel-500/25 shadow-md flex flex-col sm:flex-row items-center justify-between gap-5">
+                        <div>
+                            <h4 class="font-serif font-bold text-xl text-coffee-900">Pronto para adoçar o seu dia?</h4>
+                            <p class="text-xs sm:text-sm text-coffee-600 mt-1">Clique no botão ao lado para falar com nossa equipe no WhatsApp.</p>
+                        </div>
+                        <a id="contact-whatsapp-btn" href="#" target="_blank" rel="noopener noreferrer" class="w-full sm:w-auto shrink-0 bg-[#25D366] hover:bg-[#20bd5a] text-coffee-950 font-extrabold text-xs uppercase tracking-wider px-7 py-4 rounded-full shadow-lg transition-all flex items-center justify-center gap-2.5">
+                            <i class="fa-brands fa-whatsapp text-lg"></i>
+                            <span>Fazer Pedido Agora</span>
+                        </a>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- ==========================================================================
+         8. RODAPÉ
+         ========================================================================== -->
+    <footer class="bg-coffee-900 text-cream-200 pt-16 pb-10">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10 pb-12 border-b border-white/10">
+                
+                <!-- Coluna 1: Logo & Descrição -->
+                <div>
+                    <a href="#inicio" class="flex items-center gap-3 mb-4">
+                        <div class="w-10 h-10 rounded-xl bg-caramel-500 text-white flex items-center justify-center">
+                            <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M12 3c-2.5 0-4.5 1.8-4.5 4 0 1.2.6 2.3 1.5 3H15c.9-.7 1.5-1.8 1.5-3 0-2.2-2-4-4.5-4Z"/>
+                                <path d="M5 10h14l-1.2 8.5A2 2 0 0 1 15.8 20H8.2a2 2 0 0 1-2-1.5L5 10Z"/>
+                            </svg>
+                        </div>
+                        <div>
+                            <span class="font-serif font-bold text-xl text-white block leading-none">
+                                DOCE <span class="text-caramel-400 italic">ENCANTO</span>
+                            </span>
+                            <span class="text-[9px] uppercase tracking-[0.26em] text-cream-300 mt-1 block">Doceria &amp; Padaria</span>
+                        </div>
+                    </a>
+                    <p class="text-xs text-cream-300/80 leading-relaxed mb-6">
+                        Feito com carinho, preparado para encantar. Doces artesanais, bolos caseiros, tortas finas e pães de fermentação natural.
+                    </p>
+                    <!-- Redes Sociais -->
+                    <div class="flex items-center gap-3">
+                        <a href="https://instagram.com" target="_blank" rel="noopener noreferrer" aria-label="Instagram" class="w-9 h-9 rounded-full bg-white/10 hover:bg-caramel-500 text-white flex items-center justify-center transition-colors">
+                            <i class="fa-brands fa-instagram"></i>
+                        </a>
+                        <a href="https://facebook.com" target="_blank" rel="noopener noreferrer" aria-label="Facebook" class="w-9 h-9 rounded-full bg-white/10 hover:bg-caramel-500 text-white flex items-center justify-center transition-colors">
+                            <i class="fa-brands fa-facebook-f"></i>
+                        </a>
+                        <a id="footer-whatsapp-icon" href="#" target="_blank" rel="noopener noreferrer" aria-label="WhatsApp" class="w-9 h-9 rounded-full bg-white/10 hover:bg-[#25D366] hover:text-coffee-950 text-white flex items-center justify-center transition-colors">
+                            <i class="fa-brands fa-whatsapp"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Coluna 2: Links Rápidos -->
+                <div>
+                    <h4 class="font-serif font-bold text-base text-white mb-4">Navegação</h4>
+                    <ul class="space-y-2.5 text-xs text-cream-300/85">
+                        <li><a href="#inicio" class="hover:text-caramel-400 transition-colors">Início</a></li>
+                        <li><a href="#produtos" class="hover:text-caramel-400 transition-colors">Nosso Catálogo</a></li>
+                        <li><a href="#nossa-historia" class="hover:text-caramel-400 transition-colors">Nossa História</a></li>
+                        <li><a href="#contato" class="hover:text-caramel-400 transition-colors">Contato &amp; Horários</a></li>
+                    </ul>
+                </div>
+
+                <!-- Coluna 3: Categorias -->
+                <div>
+                    <h4 class="font-serif font-bold text-base text-white mb-4">Especialidades</h4>
+                    <ul class="space-y-2.5 text-xs text-cream-300/85">
+                        <li><a href="#produtos" onclick="selectCategoryFromFooter('Bolos')" class="hover:text-caramel-400 transition-colors">Bolos Artesanais</a></li>
+                        <li><a href="#produtos" onclick="selectCategoryFromFooter('Doces e sobremesas')" class="hover:text-caramel-400 transition-colors">Doces e Sobremesas</a></li>
+                        <li><a href="#produtos" onclick="selectCategoryFromFooter('Brownies')" class="hover:text-caramel-400 transition-colors">Brownies</a></li>
+                        <li><a href="#produtos" onclick="selectCategoryFromFooter('Pães')" class="hover:text-caramel-400 transition-colors">Pães Artesanais</a></li>
+                        <li><a href="#produtos" onclick="selectCategoryFromFooter('Tortas')" class="hover:text-caramel-400 transition-colors">Tortas Finas</a></li>
+                    </ul>
+                </div>
+
+                <!-- Coluna 4: Contato -->
+                <div>
+                    <h4 class="font-serif font-bold text-base text-white mb-4">Contato</h4>
+                    <ul class="space-y-3 text-xs text-cream-300/85">
+                        <li class="flex items-start gap-2.5">
+                            <i class="fa-solid fa-location-dot text-caramel-400 mt-0.5"></i>
+                            <span>Rua das Acácias, 480 — Jardim Botânico, São Paulo - SP</span>
+                        </li>
+                        <li class="flex items-center gap-2.5">
+                            <i class="fa-solid fa-phone text-caramel-400"></i>
+                            <span>(11) 3456-7890 • (11) 99999-9999</span>
+                        </li>
+                        <li class="flex items-center gap-2.5">
+                            <i class="fa-brands fa-instagram text-caramel-400"></i>
+                            <span>@doceencanto.oficial</span>
+                        </li>
+                    </ul>
+                </div>
+
+            </div>
+
+            <div class="pt-8 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-cream-400/75">
+                <p>&copy; 2026 DOCE ENCANTO — Doceria &amp; Padaria. Todos os direitos reservados.</p>
+                <p>Feito com carinho para encantar.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Botão Flutuante WhatsApp -->
+    <a id="floating-whatsapp-btn" href="#" target="_blank" rel="noopener noreferrer" aria-label="Fazer pedido no WhatsApp" class="wa-float fixed bottom-6 right-6 z-40 w-14 h-14 rounded-full bg-[#25D366] text-coffee-950 flex items-center justify-center shadow-2xl hover:scale-110 transition-transform">
+        <i class="fa-brands fa-whatsapp text-3xl"></i>
+    </a>
+
+    <!-- ==========================================================================
+         MODAL INTERATIVO DE ENCOMENDA PERSONALIZADA
+         ========================================================================== -->
+    <div id="order-modal" class="fixed inset-0 z-50 hidden items-center justify-center p-4 bg-coffee-950/75 backdrop-blur-sm">
+        <div class="bg-white rounded-3xl max-w-lg w-full overflow-hidden shadow-2xl border border-caramel-500/30">
+            
+            <!-- Topo Modal -->
+            <div class="bg-cream-100 px-6 py-5 border-b border-coffee-800/10 flex items-center justify-between">
+                <div class="flex items-center gap-3">
+                    <div class="w-10 h-10 rounded-xl bg-caramel-500/15 text-caramel-500 flex items-center justify-center">
+                        <i class="fa-solid fa-bag-shopping"></i>
+                    </div>
+                    <div>
+                        <h3 class="font-serif font-bold text-lg text-coffee-900">Faça seu Pedido</h3>
+                        <p class="text-xs text-coffee-600">DOCE ENCANTO • Envio direto no WhatsApp</p>
+                    </div>
+                </div>
+                <button onclick="closeOrderModal()" aria-label="Fechar modal" class="w-9 h-9 rounded-full bg-white hover:bg-cream-200 text-coffee-800 flex items-center justify-center transition-colors cursor-pointer">
+                    <i class="fa-solid fa-xmark"></i>
+                </button>
+            </div>
+
+            <!-- Formulário de Encomenda -->
+            <form onsubmit="submitOrderModal(event)" class="p-6 space-y-4">
+                <div>
+                    <label for="order-name" class="block text-xs font-bold uppercase tracking-wider text-coffee-800 mb-1.5">Seu Nome *</label>
+                    <input type="text" id="order-name" required placeholder="Ex: Mariana Silva" class="boutique-input w-full px-4 py-3 rounded-xl text-sm">
+                </div>
+
+                <div class="grid grid-cols-1 sm:grid-cols-3 gap-3">
+                    <div class="sm:col-span-2">
+                        <label for="order-product" class="block text-xs font-bold uppercase tracking-wider text-coffee-800 mb-1.5">Produto *</label>
+                        <select id="order-product" required class="boutique-input w-full px-4 py-3 rounded-xl text-sm">
+                            <!-- Opções preenchidas via JS -->
+                        </select>
+                    </div>
+                    <div>
+                        <label for="order-qty" class="block text-xs font-bold uppercase tracking-wider text-coffee-800 mb-1.5">Quantidade *</label>
+                        <input type="number" id="order-qty" min="1" max="50" value="1" required class="boutique-input w-full px-4 py-3 rounded-xl text-sm">
+                    </div>
+                </div>
+
+                <div>
+                    <label for="order-delivery" class="block text-xs font-bold uppercase tracking-wider text-coffee-800 mb-1.5">Retirada ou Entrega *</label>
+                    <select id="order-delivery" class="boutique-input w-full px-4 py-3 rounded-xl text-sm">
+                        <option value="Retirada na loja">Retirada na loja (Rua das Acácias, 480)</option>
+                        <option value="Entrega (Delivery)">Entrega (Delivery)</option>
+                    </select>
+                </div>
+
+                <div>
+                    <label for="order-notes" class="block text-xs font-bold uppercase tracking-wider text-coffee-800 mb-1.5">Observações (opcional)</label>
+                    <textarea id="order-notes" rows="2" placeholder="Ex: Escrever 'Parabéns' no bolo, horário desejado..." class="boutique-input w-full px-4 py-3 rounded-xl text-sm"></textarea>
+                </div>
+
+                <div id="order-feedback" class="hidden p-3 rounded-xl bg-caramel-500/15 border border-caramel-500/30 text-xs text-coffee-900 font-medium"></div>
+
+                <button type="submit" class="w-full py-4 px-6 rounded-full bg-[#25D366] hover:bg-[#20bd5a] text-coffee-950 font-extrabold text-xs uppercase tracking-wider shadow-lg transition-all flex items-center justify-center gap-2 cursor-pointer">
+                    <i class="fa-brands fa-whatsapp text-lg"></i>
+                    <span>Enviar Pedido pelo WhatsApp</span>
+                </button>
+            </form>
+        </div>
+    </div>
+
+    <!-- ==========================================================================
+         JAVASCRIPT CENTRALIZADO E ORGANIZADO
+         ========================================================================== -->
+    <script>
+        /* === CONFIGURAÇÃO & DADOS (data.js) ===
+           Edite facilmente o número de WhatsApp, endereço, horários e produtos aqui! */
+        const CONFIG = {
+            storeName: "DOCE ENCANTO — Doceria & Padaria",
+            whatsappNumber: "5511999999999", // Apenas números com DDI + DDD
+            phoneDisplay: "(11) 3456-7890",
+            whatsappDisplay: "(11) 99999-9999",
+            instagram: "@doceencanto.oficial",
+            address: "Rua das Acácias, 480 — Jardim Botânico, São Paulo - SP",
+            hours: "Seg a Sáb: 07h às 20h | Dom e Feriados: 08h às 14h",
+
+            categories: [
+                {
+                    name: "Bolos",
+                    icon: "fa-cake-candles",
+                    image: "https://images.unsplash.com/photo-1578985545062-69928b1d9587?auto=format&fit=crop&w=500&q=80",
+                    countLabel: "Recheados & Caseiros"
+                },
+                {
+                    name: "Doces e sobremesas",
+                    icon: "fa-ice-cream",
+                    image: "https://images.unsplash.com/photo-1541783245831-57d6fb0926d3?auto=format&fit=crop&w=500&q=80",
+                    countLabel: "Brigadeiros & Sonhos"
+                },
+                {
+                    name: "Brownies",
+                    icon: "fa-cookie-bite",
+                    image: "https://images.unsplash.com/photo-1606313564200-e75d5e30476c?auto=format&fit=crop&w=500&q=80",
+                    countLabel: "Chocolate Nobre"
+                },
+                {
+                    name: "Pães",
+                    icon: "fa-bread-slice",
+                    image: "https://images.unsplash.com/photo-1585478259715-876acc5be8eb?auto=format&fit=crop&w=500&q=80",
+                    countLabel: "Fermentação Natural"
+                },
+                {
+                    name: "Salgados",
+                    icon: "fa-cheese",
+                    image: "https://images.unsplash.com/photo-1555507036-ab1f4038808a?auto=format&fit=crop&w=500&q=80",
+                    countLabel: "Folhados & Assados"
+                },
+                {
+                    name: "Tortas",
+                    icon: "fa-chart-pie",
+                    image: "https://images.unsplash.com/photo-1464305795204-6f5bbfc7fb81?auto=format&fit=crop&w=500&q=80",
+                    countLabel: "Frutas & Cremes"
+                }
+            ],
+
+            products: [
+                {
+                    id: 1,
+                    name: "Bolo de chocolate",
+                    category: "Bolos",
+                    price: "R$ 65",
+                    numericPrice: 65,
+                    description: "Massa fofinha de cacau 50% com duas camadas generosas de brigadeiro cremoso belga e raspas de chocolate meio amargo.",
+                    image: "https://images.unsplash.com/photo-1578985545062-69928b1d9587?auto=format&fit=crop&w=800&q=80",
+                    featured: true,
+                    badge: "Mais Pedido"
+                },
+                {
+                    id: 2,
+                    name: "Brownie artesanal",
+                    category: "Brownies",
+                    price: "R$ 10",
+                    numericPrice: 10,
+                    description: "Casquinha crocante por fora e interior intensamente úmido com chocolate meio amargo derretido e toque de flor de sal.",
+                    image: "https://images.unsplash.com/photo-1606313564200-e75d5e30476c?auto=format&fit=crop&w=800&q=80",
+                    featured: true,
+                    badge: "Favorito"
+                },
+                {
+                    id: 3,
+                    name: "Sonho recheado",
+                    category: "Doces e sobremesas",
+                    price: "R$ 8",
+                    numericPrice: 8,
+                    description: "Massa macia e dourada polvilhada com açúcar fino, recheada na hora com creme de baunilha de fava ou doce de leite artesanal.",
+                    image: "https://images.unsplash.com/photo-1551024601-bec78aea704b?auto=format&fit=crop&w=800&q=80",
+                    featured: false,
+                    badge: "Fornada do Dia"
+                },
+                {
+                    id: 4,
+                    name: "Pão artesanal",
+                    category: "Pães",
+                    price: "R$ 15",
+                    numericPrice: 15,
+                    description: "Pão rústico de fermentação natural (levain) de 24 horas, com casca crocante caramelizada e miolo leve e aerado.",
+                    image: "https://images.unsplash.com/photo-1585478259715-876acc5be8eb?auto=format&fit=crop&w=800&q=80",
+                    featured: false,
+                    badge: "Levain 24h"
+                },
+                {
+                    id: 5,
+                    name: "Torta de morango",
+                    category: "Tortas",
+                    price: "R$ 75",
+                    numericPrice: 75,
+                    description: "Base crocante de pâte sucrée, creme pâtissière sedoso de baunilha e cobertura abundante de morangos frescos selecionados.",
+                    image: "https://images.unsplash.com/photo-1464305795204-6f5bbfc7fb81?auto=format&fit=crop&w=800&q=80",
+                    featured: true,
+                    badge: "Mais Pedido"
+                },
+                {
+                    id: 6,
+                    name: "Caixa de brigadeiros",
+                    category: "Doces e sobremesas",
+                    price: "R$ 25",
+                    numericPrice: 25,
+                    description: "Caixa presenteável com 12 brigadeiros gourmet artesanais nos sabores belga ao leite, caramelo salgado, ninho e pistache.",
+                    image: "https://images.unsplash.com/photo-1541783245831-57d6fb0926d3?auto=format&fit=crop&w=800&q=80",
+                    featured: false,
+                    badge: "12 Unidades"
+                },
+                {
+                    id: 7,
+                    name: "Croissant artesanal",
+                    category: "Salgados",
+                    price: "R$ 14",
+                    numericPrice: 14,
+                    description: "Massa folhada francesa com 27 camadas de manteiga extra, assada até atingir dourado perfeito e crocância irresistível.",
+                    image: "https://images.unsplash.com/photo-1555507036-ab1f4038808a?auto=format&fit=crop&w=800&q=80",
+                    featured: false,
+                    badge: "Assado na Hora"
+                }
+            ]
+        };
+
+        /* === LÓGICA & WHATSAPP (app.js) === */
+        let activeCategory = "Todos";
+
+        document.addEventListener("DOMContentLoaded", () => {
+            initGlobalWhatsAppLinks();
+            renderCategories();
+            renderHighlights();
+            renderFilterButtons();
+            renderCatalog("Todos");
+            populateOrderModalSelect();
+            initHeaderScroll();
+            initMobileMenu();
+            initScrollReveal();
+        });
+
+        /* Gerador de Link WhatsApp */
+        function buildWhatsAppUrl(message) {
+            return `https://wa.me/${CONFIG.whatsappNumber}?text=${encodeURIComponent(message)}`;
+        }
+
+        function initGlobalWhatsAppLinks() {
+            const generalMessage = `Olá, *DOCE ENCANTO*! Vim pelo site e gostaria de fazer uma encomenda.`;
+            const url = buildWhatsAppUrl(generalMessage);
+
+            const ids = [
+                "hero-whatsapp-btn",
+                "general-whatsapp-btn",
+                "contact-whatsapp-btn",
+                "footer-whatsapp-icon",
+                "floating-whatsapp-btn"
+            ];
+
+            ids.forEach(id => {
+                const el = document.getElementById(id);
+                if (el) el.href = url;
+            });
+        }
+
+        /* Renderização das 6 Categorias */
+        function renderCategories() {
+            const container = document.getElementById("categories-grid");
+            if (!container) return;
+
+            container.innerHTML = CONFIG.categories.map(cat => `
+                <button 
+                    onclick="filterByCategory('${cat.name}')" 
+                    data-cat-card="${cat.name}"
+                    class="category-card group bg-white border border-coffee-800/10 rounded-2xl p-3 text-left flex flex-col cursor-pointer focus:outline-none"
+                >
+                    <div class="relative h-28 w-full rounded-xl overflow-hidden mb-3">
+                        <img 
+                            src="${cat.image}" 
+                            alt="${cat.name}" 
+                            class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
+                            onerror="this.src='https://placehold.co/400x300/F3ECE1/3E2723?text=${encodeURIComponent(cat.name)}'"
+                        >
+                        <div class="absolute inset-0 bg-coffee-950/20 group-hover:bg-coffee-950/10 transition-colors"></div>
+                        <span class="absolute bottom-2 right-2 w-7 h-7 rounded-lg bg-white/95 text-caramel-500 flex items-center justify-center text-xs shadow">
+                            <i class="fa-solid ${cat.icon}"></i>
+                        </span>
+                    </div>
+                    <h3 class="font-serif font-bold text-base text-coffee-900 group-hover:text-caramel-500 transition-colors leading-tight">
+                        ${cat.name}
+                    </h3>
+                    <span class="text-[11px] text-coffee-600 mt-0.5">${cat.countLabel}</span>
+                </button>
+            `).join("");
+        }
+
+        /* Renderização dos Destaques ("Mais Pedidos") */
+        function renderHighlights() {
+            const container = document.getElementById("highlights-grid");
+            if (!container) return;
+
+            const featuredProducts = CONFIG.products.filter(p => p.featured);
+
+            container.innerHTML = featuredProducts.map((product, index) => {
+                const waText = `Olá, *DOCE ENCANTO*! Gostaria de pedir: *${product.name}* (${product.price}).`;
+                const waUrl = buildWhatsAppUrl(waText);
+
+                return `
+                    <article class="product-card rounded-3xl overflow-hidden flex flex-col reveal reveal-delay-${index}">
+                        <div class="relative h-64 overflow-hidden">
+                            <img 
+                                src="${product.image}" 
+                                alt="${product.name}" 
+                                class="w-full h-full object-cover"
+                                onerror="this.src='https://placehold.co/600x450/FAF6F0/3E2723?text=${encodeURIComponent(product.name)}'"
+                            >
+                            <span class="absolute top-4 left-4 bg-caramel-500 text-white text-[11px] font-bold uppercase tracking-wider px-3.5 py-1 rounded-full shadow-md">
+                                <i class="fa-solid fa-star mr-1"></i> ${product.badge}
+                            </span>
+                            <span class="absolute bottom-4 right-4 bg-white/95 backdrop-blur-sm text-coffee-900 font-serif font-bold text-lg px-4 py-1 rounded-full shadow">
+                                ${product.price}
+                            </span>
+                        </div>
+
+                        <div class="p-6 flex-1 flex flex-col justify-between">
+                            <div>
+                                <span class="text-[11px] font-bold uppercase tracking-widest text-caramel-500">${product.category}</span>
+                                <h3 class="font-serif font-bold text-2xl text-coffee-900 mt-1 mb-2">${product.name}</h3>
+                                <p class="text-xs sm:text-sm text-coffee-700 leading-relaxed mb-6">${product.description}</p>
+                            </div>
+
+                            <a 
+                                href="${waUrl}" 
+                                target="_blank" 
+                                rel="noopener noreferrer"
+                                class="w-full py-3.5 px-5 rounded-full bg-[#25D366] hover:bg-[#20bd5a] text-coffee-950 font-extrabold text-xs uppercase tracking-wider shadow-sm transition-all flex items-center justify-center gap-2"
+                            >
+                                <i class="fa-brands fa-whatsapp text-base"></i>
+                                <span>Pedir pelo WhatsApp</span>
+                            </a>
+                        </div>
+                    </article>
+                `;
+            }).join("");
+        }
+
+        /* Botões de Filtro do Catálogo */
+        function renderFilterButtons() {
+            const container = document.getElementById("catalog-filters");
+            if (!container) return;
+
+            const allCategories = ["Todos", ...CONFIG.categories.map(c => c.name)];
+
+            container.innerHTML = allCategories.map(cat => {
+                const isActive = cat === activeCategory;
+                return `
+                    <button 
+                        onclick="renderCatalog('${cat}')"
+                        class="px-5 py-2.5 rounded-full text-xs font-bold uppercase tracking-wider transition-all cursor-pointer ${
+                            isActive 
+                            ? "btn-caramel text-white" 
+                            : "bg-cream-100 text-coffee-800 hover:bg-cream-200 border border-coffee-800/10"
+                        }"
+                    >
+                        ${cat}
+                    </button>
+                `;
+            }).join("");
+        }
+
+        /* Renderização do Catálogo Principal */
+        function renderCatalog(category = "Todos") {
+            activeCategory = category;
+            renderFilterButtons();
+            updateCategoryCardSelection(category);
+
+            const container = document.getElementById("catalog-grid");
+            if (!container) return;
+
+            const filtered = category === "Todos" 
+                ? CONFIG.products 
+                : CONFIG.products.filter(p => p.category === category);
+
+            container.innerHTML = filtered.map(product => {
+                const waText = `Olá, *DOCE ENCANTO*! Gostaria de pedir o produto: *${product.name}* (${product.price}).`;
+                const waUrl = buildWhatsAppUrl(waText);
+
+                return `
+                    <article class="product-card rounded-3xl overflow-hidden flex flex-col">
+                        <div class="relative h-60 overflow-hidden">
+                            <img 
+                                src="${product.image}" 
+                                alt="${product.name}" 
+                                class="w-full h-full object-cover"
+                                onerror="this.src='https://placehold.co/600x450/FAF6F0/3E2723?text=${encodeURIComponent(product.name)}'"
+                            >
+                            <span class="absolute top-4 left-4 bg-white/95 text-coffee-900 text-[10px] font-bold uppercase tracking-wider px-3 py-1 rounded-full shadow-sm">
+                                ${product.category}
+                            </span>
+                        </div>
+
+                        <div class="p-6 flex-1 flex flex-col justify-between">
+                            <div>
+                                <div class="flex items-baseline justify-between gap-2 mb-2">
+                                    <h3 class="font-serif font-bold text-xl text-coffee-900">${product.name}</h3>
+                                    <span class="font-serif font-bold text-xl text-caramel-500 shrink-0">${product.price}</span>
+                                </div>
+                                <p class="text-xs sm:text-sm text-coffee-700 leading-relaxed mb-6">
+                                    ${product.description}
+                                </p>
+                            </div>
+
+                            <div class="flex items-center gap-2">
+                                <a 
+                                    href="${waUrl}" 
+                                    target="_blank" 
+                                    rel="noopener noreferrer"
+                                    class="flex-1 py-3.5 px-4 rounded-full bg-coffee-800 hover:bg-caramel-500 text-white font-bold text-xs uppercase tracking-wider transition-all flex items-center justify-center gap-2"
+                                >
+                                    <i class="fa-brands fa-whatsapp text-[#25D366] text-base"></i>
+                                    <span>Pedir pelo WhatsApp</span>
+                                </a>
+                            </div>
+                        </div>
+                    </article>
+                `;
+            }).join("");
+        }
+
+        /* Filtrar ao Clicar em um Card de Categoria */
+        function filterByCategory(categoryName) {
+            renderCatalog(categoryName);
+            const catalogSection = document.getElementById("produtos");
+            if (catalogSection) {
+                catalogSection.scrollIntoView({ behavior: "smooth" });
+            }
+        }
+
+        function selectCategoryFromFooter(categoryName) {
+            renderCatalog(categoryName);
+        }
+
+        function updateCategoryCardSelection(categoryName) {
+            document.querySelectorAll("[data-cat-card]").forEach(card => {
+                if (card.getAttribute("data-cat-card") === categoryName) {
+                    card.classList.add("selected");
+                } else {
+                    card.classList.remove("selected");
+                }
+            });
+        }
+
+        /* Modal de Encomenda Personalizada */
+        function populateOrderModalSelect() {
+            const select = document.getElementById("order-product");
+            if (!select) return;
+
+            select.innerHTML = CONFIG.products.map(p => 
+                `<option value="${p.name} (${p.price})">${p.name} — ${p.price}</option>`
+            ).join("") + `<option value="Encomenda Personalizada (Bolo / Kit Festa)">Encomenda Personalizada (Bolo / Kit Festa)</option>`;
+        }
+
+        function openOrderModal() {
+            const modal = document.getElementById("order-modal");
+            const feedback = document.getElementById("order-feedback");
+            if (feedback) feedback.classList.add("hidden");
+
+            modal.classList.remove("hidden");
+            modal.classList.add("flex");
+            document.body.style.overflow = "hidden";
+        }
+
+        function closeOrderModal() {
+            const modal = document.getElementById("order-modal");
+            modal.classList.add("hidden");
+            modal.classList.remove("flex");
+            document.body.style.overflow = "";
+        }
+
+        function submitOrderModal(event) {
+            event.preventDefault();
+
+            const name = document.getElementById("order-name").value.trim();
+            const product = document.getElementById("order-product").value;
+            const qty = document.getElementById("order-qty").value;
+            const delivery = document.getElementById("order-delivery").value;
+            const notes = document.getElementById("order-notes").value.trim();
+
+            let message = `Olá, *DOCE ENCANTO*! Gostaria de fazer um pedido:\n\n` +
+                          `👤 *Cliente:* ${name}\n` +
+                          `🍰 *Produto:* ${product}\n` +
+                          `🔢 *Quantidade:* ${qty}\n` +
+                          `🛍️ *Modalidade:* ${delivery}\n`;
+
+            if (notes) {
+                message += `📝 *Observações:* ${notes}\n`;
+            }
+
+            message += `\nAguardo a confirmação!`;
+
+            const feedback = document.getElementById("order-feedback");
+            feedback.innerHTML = `<i class="fa-solid fa-circle-check text-caramel-500 mr-1.5"></i> Pedido preparado! Abrindo o WhatsApp da DOCE ENCANTO...`;
+            feedback.classList.remove("hidden");
+
+            setTimeout(() => {
+                window.open(buildWhatsAppUrl(message), "_blank", "noopener,noreferrer");
+                closeOrderModal();
+            }, 850);
+        }
+
+        /* Efeito Scroll no Cabeçalho */
+        function initHeaderScroll() {
+            const header = document.getElementById("main-header");
+            window.addEventListener("scroll", () => {
+                if (window.scrollY > 40) {
+                    header.classList.add("header-scrolled");
+                } else {
+                    header.classList.remove("header-scrolled");
+                }
+            });
+        }
+
+        /* Menu Mobile */
+        function initMobileMenu() {
+            const btn = document.getElementById("mobile-menu-toggle");
+            if (btn) btn.addEventListener("click", toggleMobileMenu);
+
+            document.querySelectorAll(".mobile-link").forEach(link => {
+                link.addEventListener("click", () => {
+                    const menu = document.getElementById("mobile-menu");
+                    if (!menu.classList.contains("hidden")) toggleMobileMenu();
+                });
+            });
+        }
+
+        function toggleMobileMenu() {
+            const menu = document.getElementById("mobile-menu");
+            const icon = document.getElementById("mobile-menu-icon");
+            menu.classList.toggle("hidden");
+
+            if (menu.classList.contains("hidden")) {
+                icon.classList.remove("fa-xmark");
+                icon.classList.add("fa-bars");
+            } else {
+                icon.classList.remove("fa-bars");
+                icon.classList.add("fa-xmark");
+            }
+        }
+
+        /* Animações Suaves ao Rolar */
+        function initScrollReveal() {
+            const elements = document.querySelectorAll(".reveal");
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add("active");
+                        observer.unobserve(entry.target);
+                    }
+                });
+            }, { threshold: 0.12 });
+
+            elements.forEach(el => observer.observe(el));
+        }
+
+        // Fechar modal com tecla ESC
+        document.addEventListener("keydown", (e) => {
+            if (e.key === "Escape") closeOrderModal();
+        });
+    </script>
+</body>
+</html>
